@@ -28,6 +28,15 @@ public class SecurityService {
         repo.save(u);
         return u;
     }
+    public User delete(String username, String pw){
+        User u = repo.findById(username).orElse(null);
+
+        if(u == null || !myEncoder.matches(pw, u.getPassword()) ){
+            return null;
+        }
+        repo.delete(u);
+        return null;
+    }
 
 
     public String login(String username, String pw){
