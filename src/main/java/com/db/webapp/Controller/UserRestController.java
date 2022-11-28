@@ -1,8 +1,6 @@
 package com.db.webapp.Controller;
-
 import java.util.Base64;
-
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +10,21 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.db.webapp.Repository.UserRepository;
 import com.db.webapp.Service.SecurityService;
 import com.db.webapp.model.User;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
+
+@CrossOrigin
 @RestController
 public class UserRestController {
     @Autowired
     SecurityService uRepo;
+    
+    @Autowired
+    private UserRepository repo2;
 
     @PostMapping("register")
     public ResponseEntity<String> register(
@@ -77,5 +82,12 @@ public class UserRestController {
             }
 
             return new ResponseEntity<>(token, HttpStatus.OK);
+        }
+
+
+   
+        @GetMapping("data")List<String>data(){
+            return repo2.getdata();
+    
         }
 }

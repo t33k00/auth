@@ -1,14 +1,17 @@
 package com.db.webapp.Repository;
-/* import java.util.List;
-import org.springframework.data.jpa.repository.Query; */
+ import java.util.List;
+import org.springframework.data.jpa.repository.Query; 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.stereotype.Repository;
 
 import com.db.webapp.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
+
+    @Query(value ="SELECT * FROM g_monthly_json", nativeQuery= true)
+    List<String> getdata();
+
 
 /*      @Query("select u from User u where u.name=?1")
     List<User> findByName(String name);
